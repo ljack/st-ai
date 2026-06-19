@@ -1,0 +1,20 @@
+{
+  "name": "@st-ai/cli",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "st": "./dist/index.js",
+    "st.ai": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@st-ai/client": "workspace:*",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^20.0.0"
+  }
+}

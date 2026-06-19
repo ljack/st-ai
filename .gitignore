@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.tsbuildinfo
+
+# Local configuration & credentials
+.env
+.env.local
+.env.*.local
+session.json
+config.json
+
+# Local exports and scratch files
+*.gpx
+*.fit
+scratch/
+
+# OS specific files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>st.ai — Sports Tracker access for AI agents</title>
+  <meta name="description" content="Run Sports Tracker from the CLI and connect it as a skill to AI agents like Claude Code, OpenClaw, and Gemini.">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" type="image/png" href="./mascot.png">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="logo-container">
+      <img src="./mascot.png" alt="st.ai mascot mini" style="width:30px; height:30px; border-radius:50%; border: 1.5px solid var(--accent-orange);">
+      <span class="logo-text">st<span>.ai</span></span>
+    </div>
+    <div class="nav-links">
+      <a class="github-btn" href="https://github.com/ljack/st-ai" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true" style="margin-right:2px;">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="mascot-container">
+      <img class="hero-mascot" src="./mascot.png" alt="st.ai mascot - running fitness robot">
+    </div>
+    
+    <h1>Sports Tracker access for <span class="gradient-text">AI agents</span>.</h1>
+    <p class="disclaimer">Independent open-source project, not affiliated with Sports-Tracker or Amer Sports.</p>
+    <p class="hero-sub">An open-source CLI and Agent Skill that lets AI agents sync, query, list, and export workout statistics, routes, and activity files from Sports Tracker.</p>
+    
+    <div class="hero-actions">
+      <a class="button primary" href="#quickstart">Add Skill to Agent</a>
+      <a class="button secondary" href="#quickstart">Install CLI</a>
+    </div>
+
+    <!-- Terminal Mockup Simulator -->
+    <div class="terminal">
+      <div class="terminal-chrome">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">st-cli</span>
+      </div>
+      <pre class="terminal-body"><span class="cmd-line">$</span> <span id="terminal-input">st workouts</span>
+<span id="terminal-output">Date             Activity             Distance     Duration     Ascent    Workout Key
+----------------------------------------------------------------------------------------------------
+2026-06-19 19:34  Running              10.24 km     48m 12s      145 m     5f8382d6e32...
+2026-06-17 18:15  Cycling              32.40 km     1h 14m 05s   310 m     5f8182b8c94...
+2026-06-14 09:40  Hiking               12.80 km     3h 12m 45s   420 m     5f7f8287e12...
+
+Total displayed: 3 workouts.</span></pre>
+    </div>
+  </section>
+
+  <!-- Quick Start Setup Section -->
+  <section class="section" id="quickstart">
+    <h2>Quick Start</h2>
+    <p class="lead">Get up and running with the Sports Tracker CLI and connect it directly to your agent.</p>
+    
+    <div class="quickstart">
+      <div class="tabs" role="tablist">
+        <button class="tab active" id="tab-agent" role="tab" aria-selected="true">Agent Skill</button>
+        <button class="tab" id="tab-cli" role="tab" aria-selected="false">CLI-only</button>
+      </div>
+
+      <div id="quickstart-content">
+        <!-- Content gets swapped via JavaScript -->
+        <p class="lead" style="margin-bottom: 1.5rem; text-align: left;" id="quickstart-lead">Use this if you want Sports Tracker as a skill for Claude Code, OpenClaw, or Gemini.</p>
+        <div class="code-block">
+          <pre id="quickstart-code"># 1) Install the CLI package globally
+npm install -g @st-ai/cli
+
+# 2) Perform initial interactive authentication
+st login
+
+# 3) Register the Sports Tracker skill to your agent
+npx skills add ljack/st-ai</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section">
+    <h2>How It Works</h2>
+    <div class="step-list">
+      <div class="step">
+        <strong>1. Direct Secure Login</strong>
+        <span>Authenticate once directly against Sports Tracker. Your credentials are used locally to generate secure TOTP tokens, obtaining a short-lived session key.</span>
+      </div>
+      <div class="step">
+        <strong>2. Secure Local Storage</strong>
+        <span>Your session key is stored locally in `~/.config/st-ai/config.json` with secure `0600` permissions. No passwords or tokens ever leave your machine.</span>
+      </div>
+      <div class="step">
+        <strong>3. AI-Ready Outputs</strong>
+        <span>Retrieve active metrics, routes, calendar logs, and GPX files using standard format commands. Output cleanly structured JSON data directly into your LLM prompt context.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLI Commands Section -->
+  <section class="section">
+    <h2>What can I do with st.ai?</h2>
+    <p class="lead">Run commands interactively or let your agent execute them programmatically to monitor your progress.</p>
+    
+    <div class="cards">
+      <div class="card">
+        <h3>Login & Setup</h3>
+        <p class="card-prompt">Authenticate and verify your active session credentials.</p>
+        <code class="cmd">st login</code>
+      </div>
+      <div class="card">
+        <h3>List workouts</h3>
+        <p class="card-prompt">Get a quick history list of your recent fitness activities.</p>
+        <code class="cmd">st workouts</code>
+      </div>
+      <div class="card">
+        <h3>Summary Stats</h3>
+        <p class="card-prompt">Show total stats and aggregate values by activity type.</p>
+        <code class="cmd">st stats</code>
+      </div>
+      <div class="card">
+        <h3>Export GPX / FIT</h3>
+        <p class="card-prompt">Download workout route files to import into Strava or GPX maps.</p>
+        <code class="cmd">st export [key] [outPath]</code>
+      </div>
+      <div class="card">
+        <h3>Sync & Upload</h3>
+        <p class="card-prompt">Upload pre-built SML/JSON files to add new training logs.</p>
+        <code class="cmd">st upload [smlPath]</code>
+      </div>
+      <div class="card">
+        <h3>Delete entries</h3>
+        <p class="card-prompt">Remove incorrect workout logs from the Sports Tracker database.</p>
+        <code class="cmd">st delete [key]</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section">
+    <h2>FAQ</h2>
+    <div class="faq">
+      <div class="card">
+        <h3>Where do my credentials live?</h3>
+        <p>Your credentials remain 100% local. Once verified, the login key obtains a session key, which is saved locally under your profile settings. We never run a backend database or save user info.</p>
+      </div>
+      <div class="card">
+        <h3>Do I need a backend?</h3>
+        <p>No backend is needed. It runs fully local as a CLI client, calling the Sports Tracker API directly on your behalf.</p>
+      </div>
+      <div class="card">
+        <h3>Is this officially endorsed?</h3>
+        <p>No. This is a community-developed, open-source tool created by a developer who wanted scriptable and agentic access to their fitness data.</p>
+      </div>
+      <div class="card">
+        <h3>Can AI agents read my GPX routes?</h3>
+        <p>Yes! With the `--json` option, the CLI yields structured output. AI agents can read this, analyze your training frequency, plot route summaries, and give suggestions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <img class="footer-logo" src="./mascot.png" alt="st.ai footer logo">
+    <div class="footer-links">
+      <a href="https://github.com/ljack/st-ai" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://github.com/ljack/st-ai#readme" target="_blank" rel="noreferrer">Docs</a>
+      <a href="https://github.com/ljack/st-ai/issues" target="_blank" rel="noreferrer">Issues</a>
+    </div>
+    <span>MIT Licensed &copy; 2026 st.ai</span>
+  </footer>
+
+  <script src="./index.js" type="module"></script>
+</body>
+</html>
